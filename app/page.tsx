@@ -4,7 +4,73 @@ import React from "react";
 import { motion } from "framer-motion";
 import { FaDownload, FaEnvelope, FaEye, FaLaptopCode, FaPalette, FaComments, FaMobileAlt } from "react-icons/fa";
 import { useDarkMode } from "./layout";
-// Komponen React-Bits dan komponen custom akan dibuat di bawah
+// Komponen Navbar dengan hamburger menu
+function Navbar() {
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  return (
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-[#0F172A]/80 backdrop-blur-lg shadow-lg transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          <div className="flex-shrink-0">
+            <a href="#" className="text-2xl font-bold text-gray-900 dark:text-white">Fitra</a>
+          </div>
+          {/* Desktop Menu */}
+          <div className="hidden md:block">
+            <div className="ml-10 flex items-center space-x-4">
+              <a href="#about" className="text-gray-900 dark:text-white hover:text-[#A67B5B] px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">Tentang</a>
+              <a href="#projects" className="text-gray-900 dark:text-white hover:text-[#A67B5B] px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">Portofolio</a>
+              <a href="#services" className="text-gray-900 dark:text-white hover:text-[#A67B5B] px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">Layanan</a>
+              <a href="#resume" className="text-gray-900 dark:text-white hover:text-[#A67B5B] px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">Resume</a>
+              <a href="#contact" className="text-gray-900 dark:text-white hover:text-[#A67B5B] px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">Kontak</a>
+            </div>
+          </div>
+          <div className="flex items-center gap-4">
+            <DarkModeToggle />
+            {/* Hamburger button */}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-900 dark:text-white hover:text-[#A67B5B] focus:outline-none"
+              aria-expanded="false"
+            >
+              <span className="sr-only">Open main menu</span>
+              <svg
+                className={`${isOpen ? 'hidden' : 'block'} h-6 w-6`}
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+              <svg
+                className={`${isOpen ? 'block' : 'hidden'} h-6 w-6`}
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      {/* Mobile menu */}
+      <div className={`${isOpen ? 'block' : 'hidden'} md:hidden bg-white/80 dark:bg-[#0F172A]/80 backdrop-blur-lg transition-colors duration-300`}>
+        <div className="px-2 pt-2 pb-3 space-y-1">
+          <a href="#about" className="text-gray-900 dark:text-white hover:text-[#A67B5B] block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200" onClick={() => setIsOpen(false)}>Tentang</a>
+          <a href="#projects" className="text-gray-900 dark:text-white hover:text-[#A67B5B] block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200" onClick={() => setIsOpen(false)}>Portofolio</a>
+          <a href="#services" className="text-gray-900 dark:text-white hover:text-[#A67B5B] block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200" onClick={() => setIsOpen(false)}>Layanan</a>
+          <a href="#resume" className="text-gray-900 dark:text-white hover:text-[#A67B5B] block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200" onClick={() => setIsOpen(false)}>Resume</a>
+          <a href="#contact" className="text-gray-900 dark:text-white hover:text-[#A67B5B] block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200" onClick={() => setIsOpen(false)}>Kontak</a>
+        </div>
+      </div>
+    </nav>
+  );
+}
 
 // Pindahkan deklarasi komponen ke atas sebelum Home
 function DarkModeToggle() {
@@ -146,21 +212,21 @@ function ProjectsSection() {
           ))}
         </div>
         {/* Grid project */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
           {filtered.map((p, i) => (
             <motion.div key={p.title} whileHover={{ scale: 1.03, boxShadow: "0 8px 32px #A67B5B33" }} className="bg-[#1e293b] rounded-xl overflow-hidden shadow-lg cursor-pointer group transition" onClick={() => setModal(p)}>
-              <div className="h-48 w-full overflow-hidden">
+              <div className="h-48 sm:h-56 w-full overflow-hidden">
                 <img src={p.image} alt={p.title} className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300" />
               </div>
-              <div className="p-5">
-                <h3 className="text-xl font-bold mb-2">{p.title}</h3>
-                <p className="text-[#D0E6F7] mb-3 line-clamp-2">{p.desc}</p>
+              <div className="p-4 sm:p-5">
+                <h3 className="text-lg sm:text-xl font-bold mb-2">{p.title}</h3>
+                <p className="text-[#D0E6F7] text-sm sm:text-base mb-3 line-clamp-2">{p.desc}</p>
                 <div className="flex flex-wrap gap-2 mb-3">
                   {p.tech.map(t => <span key={t} className="bg-[#D0E6F7]/20 text-[#D0E6F7] px-2 py-1 rounded text-xs">{t}</span>)}
                 </div>
-                <div className="flex gap-3">
-                  <a href={p.demo} target="_blank" rel="noopener" className="inline-flex items-center gap-1 px-3 py-1 rounded bg-[#A67B5B] text-white hover:bg-[#D0E6F7] hover:text-[#0F172A] text-sm font-semibold transition"><FaEye /> Demo</a>
-                  <a href={p.github} target="_blank" rel="noopener" className="inline-flex items-center gap-1 px-3 py-1 rounded bg-[#D0E6F7] text-[#0F172A] hover:bg-[#A67B5B] hover:text-white text-sm font-semibold transition"><FaEye /> GitHub</a>
+                <div className="flex gap-2 sm:gap-3 flex-wrap">
+                  <a href={p.demo} target="_blank" rel="noopener" className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1 px-3 py-1 rounded bg-[#A67B5B] text-white hover:bg-[#D0E6F7] hover:text-[#0F172A] text-sm font-semibold transition"><FaEye /> Demo</a>
+                  <a href={p.github} target="_blank" rel="noopener" className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1 px-3 py-1 rounded bg-[#D0E6F7] text-[#0F172A] hover:bg-[#A67B5B] hover:text-white text-sm font-semibold transition"><FaEye /> GitHub</a>
                 </div>
               </div>
             </motion.div>
@@ -219,12 +285,12 @@ function ServicesSection() {
         <motion.h2 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-3xl md:text-4xl font-bold mb-8 text-center">
           Layanan
         </motion.h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
           {services.map((s, i) => (
-            <motion.div key={s.title} whileHover={{ scale: 1.04, boxShadow: "0 0 32px #A67B5B55" }} className="bg-[#1e293b] rounded-xl p-8 flex flex-col items-center text-center shadow-lg transition group cursor-pointer hover:ring-2 hover:ring-[#A67B5B]">
-              <div className="text-4xl mb-4 text-[#A67B5B] group-hover:text-[#D0E6F7] transition">{s.icon}</div>
-              <h3 className="text-xl font-bold mb-2">{s.title}</h3>
-              <p className="text-[#D0E6F7]">{s.desc}</p>
+            <motion.div key={s.title} whileHover={{ scale: 1.04, boxShadow: "0 0 32px #A67B5B55" }} className="bg-[#1e293b] rounded-xl p-6 sm:p-8 flex flex-col items-center text-center shadow-lg transition group cursor-pointer hover:ring-2 hover:ring-[#A67B5B]">
+              <div className="text-3xl sm:text-4xl mb-3 sm:mb-4 text-[#A67B5B] group-hover:text-[#D0E6F7] transition">{s.icon}</div>
+              <h3 className="text-lg sm:text-xl font-bold mb-2">{s.title}</h3>
+              <p className="text-[#D0E6F7] text-sm sm:text-base">{s.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -244,39 +310,39 @@ function ResumeSection() {
             <FaDownload /> Unduh PDF
           </a>
         </div>
-        <div className="bg-[#1e293b] rounded-xl p-8 shadow-lg">
-          <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-6 gap-4">
+        <div className="bg-[#1e293b] rounded-xl p-6 sm:p-8 shadow-lg">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">
             <div>
-              <h3 className="text-2xl font-bold">Fitra Rizky Oktarian</h3>
-              <p className="text-[#D0E6F7]">Frontend Developer | UI Designer</p>
+              <h3 className="text-xl sm:text-2xl font-bold">Fitra Rizky Oktarian</h3>
+              <p className="text-[#D0E6F7] text-sm sm:text-base">Frontend Developer | UI Designer</p>
             </div>
-            <div className="text-[#D0E6F7] text-sm">
+            <div className="text-[#D0E6F7] text-xs sm:text-sm">
               orian3969@gmail.com<br />
               LinkedIn: linkedin.com/in/fitrarizky
             </div>
           </div>
           <div className="mb-6">
-            <h4 className="text-xl font-semibold mb-2">Pendidikan</h4>
-            <ul className="list-disc ml-6 text-[#D0E6F7]">
+            <h4 className="text-lg sm:text-xl font-semibold mb-2">Pendidikan</h4>
+            <ul className="list-disc ml-4 sm:ml-6 text-[#D0E6F7] text-sm sm:text-base">
               <li>universitas lampung fisip</li>
             </ul>
           </div>
           <div className="mb-6">
-            <h4 className="text-xl font-semibold mb-2">Pengalaman Kerja</h4>
-            <ul className="list-disc ml-6 text-[#D0E6F7]">
+            <h4 className="text-lg sm:text-xl font-semibold mb-2">Pengalaman Kerja</h4>
+            <ul className="list-disc ml-4 sm:ml-6 text-[#D0E6F7] text-sm sm:text-base">
               <li>Frontend Developer (Freelance) - 2021-Sekarang</li>
               <li>UI Designer - 2021-Sekarang</li>
             </ul>
           </div>
           <div>
-            <h4 className="text-xl font-semibold mb-2">Skill</h4>
+            <h4 className="text-lg sm:text-xl font-semibold mb-2">Skill</h4>
             <div className="flex flex-wrap gap-2">
-              <span className="bg-[#A67B5B]/80 text-white px-3 py-1 rounded-full text-sm">React.js</span>
-              <span className="bg-[#A67B5B]/80 text-white px-3 py-1 rounded-full text-sm">Next.js</span>
-              <span className="bg-[#A67B5B]/80 text-white px-3 py-1 rounded-full text-sm">Tailwind CSS</span>
-              <span className="bg-[#A67B5B]/80 text-white px-3 py-1 rounded-full text-sm">UI/UX Design</span>
-              <span className="bg-[#A67B5B]/80 text-white px-3 py-1 rounded-full text-sm">TypeScript</span>
-              <span className="bg-[#A67B5B]/80 text-white px-3 py-1 rounded-full text-sm">Framer Motion</span>
+              <span className="bg-[#A67B5B]/80 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">React.js</span>
+              <span className="bg-[#A67B5B]/80 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">Next.js</span>
+              <span className="bg-[#A67B5B]/80 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">Tailwind CSS</span>
+              <span className="bg-[#A67B5B]/80 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">UI/UX Design</span>
+              <span className="bg-[#A67B5B]/80 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">TypeScript</span>
+              <span className="bg-[#A67B5B]/80 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">Framer Motion</span>
             </div>
           </div>
         </div>
@@ -296,7 +362,7 @@ function ContactSection() {
         <form
           action="https://formsubmit.co/your@email.com" // Ganti dengan email asli di FormSubmit
           method="POST"
-          className="bg-[#1e293b] rounded-xl p-8 shadow-lg flex flex-col gap-5"
+          className="bg-[#1e293b] rounded-xl p-6 sm:p-8 shadow-lg flex flex-col gap-4 sm:gap-5 w-full"
           onSubmit={e => {
             setStatus('idle');
             // Validasi manual (opsional, HTML5 sudah cukup)
@@ -334,22 +400,23 @@ function ContactSection() {
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white dark:bg-[#0F172A] text-gray-900 dark:text-white font-sans transition-colors duration-300">
+    <main className="min-h-screen bg-white dark:bg-[#0F172A] text-gray-900 dark:text-white font-sans transition-colors duration-300 pt-16">
+      <Navbar />
       {/* Hero Section */}
-      <section className="flex flex-col items-center justify-center min-h-screen relative overflow-hidden">
+      <section className="flex flex-col items-center justify-center min-h-screen relative overflow-hidden px-4 sm:px-6 lg:px-8">
         {/* Background image dan overlay */}
         <div className="absolute inset-0 z-0">
           <img src="/WhatsApp Image 2025-07-18 at 20.31.23_35fe1a3d.jpg" alt="Background" className="w-full h-full object-cover object-center" />
           <div className="absolute inset-0 bg-gradient-to-tr from-[#0F172A]/90 via-[#A67B5B]/20 to-[#D0E6F7]/30 backdrop-blur-sm" />
         </div>
-        <div className="relative z-10 flex flex-col items-center gap-6">
-          <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-5xl md:text-7xl font-bold text-center drop-shadow-lg">
+        <div className="relative z-10 flex flex-col items-center gap-6 w-full max-w-4xl mx-auto">
+          <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-4xl sm:text-5xl md:text-7xl font-bold text-center drop-shadow-lg">
             Fitra Rizky Oktarian
           </motion.h1>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5, duration: 0.8 }}>
-            <TypingText text="Frontend Developer | UI Designer | Problem Solver" className="text-xl md:text-2xl font-medium text-[#D0E6F7]" />
+            <TypingText text="Frontend Developer | UI Designer | Problem Solver" className="text-lg sm:text-xl md:text-2xl font-medium text-[#D0E6F7] text-center" />
           </motion.div>
-          <div className="flex gap-4 mt-6">
+          <div className="flex flex-col sm:flex-row gap-4 mt-6 w-full justify-center">
             <CTAButton href="#projects" icon={<FaEye />} text="Lihat Portofolio" />
             <CTAButton href="/cv-fitra.pdf" icon={<FaDownload />} text="Unduh CV" download />
             <CTAButton href="#contact" icon={<FaEnvelope />} text="Kontak Saya" />
