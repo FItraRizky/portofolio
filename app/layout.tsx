@@ -1,6 +1,5 @@
 'use client';
 
-import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import React, { createContext, useContext, useEffect, useState } from 'react';
@@ -18,11 +17,7 @@ const geistMono = localFont({
 
 
 
-const DarkModeContext = createContext<{dark: boolean, toggle: () => void}>({dark: false, toggle: () => {}});
-
-export function useDarkMode() {
-  return useContext(DarkModeContext);
-}
+import { DarkModeContext } from './hooks/useDarkMode';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const [dark, setDark] = useState(false);
