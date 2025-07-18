@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaDownload, FaEnvelope, FaEye, FaLaptopCode, FaPalette, FaComments, FaMobileAlt } from "react-icons/fa";
-import { useDarkMode } from "./layout";
+import { useDarkMode } from "./hooks/useDarkMode";
 // Komponen Navbar dengan hamburger menu
 function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false);
