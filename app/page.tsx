@@ -22,7 +22,7 @@ function DarkModeToggle() {
 }
 function AboutSection() {
   return (
-    <section id="about" className="py-24 bg-[#0F172A] text-white">
+    <section id="about" className="py-24 bg-gray-100 dark:bg-[#0F172A] text-gray-900 dark:text-white transition-colors duration-300">
       <div className="max-w-4xl mx-auto px-4">
         <motion.h2 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-3xl md:text-4xl font-bold mb-6 text-center">
           Tentang Saya
@@ -132,7 +132,7 @@ function ProjectsSection() {
   const filtered = filter === "All" ? projects : projects.filter(p => p.category === filter);
 
   return (
-    <section id="projects" className="py-24 bg-[#0F172A] text-white">
+    <section id="projects" className="py-24 bg-gray-100 dark:bg-[#0F172A] text-gray-900 dark:text-white transition-colors duration-300">
       <div className="max-w-5xl mx-auto px-4">
         <motion.h2 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-3xl md:text-4xl font-bold mb-8 text-center">
           Portofolio & Project
@@ -214,7 +214,7 @@ function ServicesSection() {
     },
   ];
   return (
-    <section id="services" className="py-24 bg-[#0F172A] text-white">
+    <section id="services" className="py-24 bg-gray-100 dark:bg-[#0F172A] text-gray-900 dark:text-white transition-colors duration-300">
       <div className="max-w-4xl mx-auto px-4">
         <motion.h2 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-3xl md:text-4xl font-bold mb-8 text-center">
           Layanan
@@ -234,7 +234,7 @@ function ServicesSection() {
 }
 function ResumeSection() {
   return (
-    <section id="resume" className="py-24 bg-[#0F172A] text-white">
+    <section id="resume" className="py-24 bg-gray-100 dark:bg-[#0F172A] text-gray-900 dark:text-white transition-colors duration-300">
       <div className="max-w-3xl mx-auto px-4">
         <motion.h2 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-3xl md:text-4xl font-bold mb-8 text-center">
           Resume & CV
@@ -288,7 +288,7 @@ function ContactSection() {
   const [status, setStatus] = React.useState<'idle' | 'success' | 'error'>('idle');
 
   return (
-    <section id="contact" className="py-24 bg-[#0F172A] text-white">
+    <section id="contact" className="py-24 bg-gray-100 dark:bg-[#0F172A] text-gray-900 dark:text-white transition-colors duration-300">
       <div className="max-w-xl mx-auto px-4">
         <motion.h2 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-3xl md:text-4xl font-bold mb-8 text-center">
           Kontak Saya
@@ -334,7 +334,7 @@ function ContactSection() {
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-[#0F172A] via-[#D0E6F7]/30 to-[#A67B5B]/10 text-white font-sans">
+    <main className="min-h-screen bg-white dark:bg-[#0F172A] text-gray-900 dark:text-white font-sans transition-colors duration-300">
       {/* Hero Section */}
       <section className="flex flex-col items-center justify-center min-h-screen relative overflow-hidden">
         {/* Background image dan overlay */}
