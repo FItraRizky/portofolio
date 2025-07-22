@@ -15,8 +15,6 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-
-
 import { DarkModeContext } from './hooks/useDarkMode';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -48,8 +46,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   };
 
   return (
-    <html lang="id" className={dark ? 'dark' : ''}>
-      <body className="bg-white dark:bg-[#0F172A] transition-colors duration-300">
+    <html lang="id" className={`${geistSans.variable} ${geistMono.variable} ${dark ? 'dark' : ''}`}>
+      <body className={`${geistSans.className} bg-white dark:bg-[#0F172A] transition-colors duration-300`}>
         <DarkModeContext.Provider value={{dark, toggle}}>
           {children}
         </DarkModeContext.Provider>
